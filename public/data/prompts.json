@@ -1,0 +1,43 @@
+{
+    "categories": [
+        {
+            "name": "Marketing",
+            "prompts": [
+                {
+                    "title": "Content Strategie",
+                    "prompt": "Entwickle eine Content-Strategie für Social Media, die auf B2B Marketing ausgerichtet ist."
+                },
+                {
+                    "title": "SEO Analyse",
+                    "prompt": "Analysiere diese Keywords für unsere Website und schlage Verbesserungen vor:"
+                }
+            ]
+        },
+        {
+            "name": "Kundenservice",
+            "prompts": [
+                {
+                    "title": "FAQ Generator",
+                    "prompt": "Erstelle eine Liste häufig gestellter Fragen und Antworten für unser Produkt."
+                },
+                {
+                    "title": "Email Templates",
+                    "prompt": "Generiere professionelle Email-Vorlagen für Kundenanfragen."
+                }
+            ]
+        },
+        {
+            "name": "Produktentwicklung",
+            "prompts": [
+                {
+                    "title": "Feature Brainstorming",
+                    "prompt": "Lass uns Ideen für neue Features entwickeln, die unseren Nutzern helfen könnten."
+                },
+                {
+                    "title": "User Stories",
+                    "prompt": "Erstelle User Stories für folgende Produktfunktion:"
+                }
+            ]
+        }
+    ]
+}

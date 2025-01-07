@@ -1,0 +1,182 @@
+{
+    "categories": [
+        "All",
+        "Content Marketing",
+        "Social Media",
+        "Email & Ads",
+        "SEO & Analytics",
+        "Brand & Business",
+        "Sales & Conversion"
+    ],
+    "assistants": [
+        {
+            "title": "Blog Headlines",
+            "description": "Create attention-grabbing headlines for your articles",
+            "category": "Content Marketing",
+            "icon": "📝",
+            "inputs": [
+                {
+                    "id": "topic",
+                    "label": "Blog Topic",
+                    "type": "text",
+                    "placeholder": "Enter your blog topic",
+                    "required": true
+                },
+                {
+                    "id": "keywords",
+                    "label": "Target Keywords",
+                    "type": "text",
+                    "placeholder": "Enter target keywords (comma separated)",
+                    "required": false
+                },
+                {
+                    "id": "tone",
+                    "label": "Writing Tone",
+                    "type": "select",
+                    "options": [
+                        "Professional",
+                        "Casual",
+                        "Humorous",
+                        "Serious"
+                    ],
+                    "default": "Professional"
+                }
+            ]
+        },
+        {
+            "title": "Blog Intros",
+            "description": "Generate engaging introductions for your blog content",
+            "category": "Content Marketing",
+            "icon": "✍️",
+            "inputs": [
+                {
+                    "id": "headline",
+                    "label": "Blog Headline",
+                    "type": "text",
+                    "placeholder": "Enter your blog headline",
+                    "required": true
+                },
+                {
+                    "id": "targetAudience",
+                    "label": "Target Audience",
+                    "type": "text",
+                    "placeholder": "Who is this blog post for?",
+                    "required": true
+                },
+                {
+                    "id": "keyPoints",
+                    "label": "Key Points",
+                    "type": "textarea",
+                    "placeholder": "Enter 2-3 main points you want to cover",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "title": "Social Media Post Ideas",
+            "description": "Generate creative ideas for your social media content",
+            "category": "Social Media",
+            "icon": "💡",
+            "inputs": [
+                {
+                    "id": "platform",
+                    "label": "Social Platform",
+                    "type": "select",
+                    "options": [
+                        "Instagram",
+                        "Twitter",
+                        "LinkedIn",
+                        "Facebook"
+                    ],
+                    "required": true
+                },
+                {
+                    "id": "industry",
+                    "label": "Industry",
+                    "type": "text",
+                    "placeholder": "Your business industry",
+                    "required": true
+                },
+                {
+                    "id": "goal",
+                    "label": "Post Goal",
+                    "type": "select",
+                    "options": [
+                        "Engagement",
+                        "Brand Awareness",
+                        "Lead Generation",
+                        "Sales"
+                    ],
+                    "default": "Engagement"
+                }
+            ]
+        },
+        {
+            "title": "Email Subject Lines",
+            "description": "Create compelling email subject lines that get opened",
+            "category": "Email & Ads",
+            "icon": "📧",
+            "inputs": [
+                {
+                    "id": "emailType",
+                    "label": "Email Type",
+                    "type": "select",
+                    "options": [
+                        "Newsletter",
+                        "Promotional",
+                        "Welcome Email",
+                        "Follow-up"
+                    ],
+                    "required": true
+                },
+                {
+                    "id": "productName",
+                    "label": "Product/Service Name",
+                    "type": "text",
+                    "placeholder": "What are you promoting?",
+                    "required": false
+                },
+                {
+                    "id": "urgency",
+                    "label": "Include Urgency",
+                    "type": "checkbox",
+                    "default": false
+                }
+            ]
+        },
+        {
+            "title": "SEO Descriptions",
+            "description": "Write optimized meta descriptions for better rankings",
+            "category": "SEO & Analytics",
+            "icon": "🔍",
+            "inputs": [
+                {
+                    "id": "pageTitle",
+                    "label": "Page Title",
+                    "type": "text",
+                    "placeholder": "Enter your page title",
+                    "required": true
+                },
+                {
+                    "id": "keywords",
+                    "label": "Target Keywords",
+                    "type": "text",
+                    "placeholder": "Primary keyword, secondary keywords",
+                    "required": true
+                },
+                {
+                    "id": "pageType",
+                    "label": "Page Type",
+                    "type": "select",
+                    "options": [
+                        "Homepage",
+                        "Product Page",
+                        "Blog Post",
+                        "Category Page"
+                    ],
+                    "required": true
+                }
+            ]
+        }
+    ]
+}
