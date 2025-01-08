@@ -2,6 +2,23 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
+import { fal } from "@fal-ai/client";
+import type { Result } from "@fal-ai/client";
+
+interface FalImageResponse {
+    images: Array<{
+        url: string;
+        content_type: string;
+    }>;
+    seed: number;
+    has_nsfw_concepts: boolean[];
+    prompt: string;
+}
+
+// Configure fal.ai client
+fal.config({
+    credentials: process.env.NEXT_PUBLIC_FAL_KEY
+});
 
 interface Placeholder {
     id: string;
@@ -28,6 +45,9 @@ export default function VariantCreator({ formula }: VariantCreatorProps) {
     const { register, handleSubmit, watch, setValue } = useForm();
     const [generatedPrompt, setGeneratedPrompt] = useState('');
     const [showCopySuccess, setShowCopySuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     // Watch all fields for live preview
     const formValues = watch();
@@ -53,10 +73,32 @@ export default function VariantCreator({ formula }: VariantCreatorProps) {
         setTimeout(() => setShowCopySuccess(false), 2000);
     };
 
-    const onSubmit = (data: any) => {
-        updatePrompt(data);
-        // Here we would typically call an API to generate the image
-        console.log('Generated Prompt:', generatedPrompt);
+    const onSubmit = async (data: any) => {
+        try {
+            updatePrompt(data);
+            setIsLoading(true);
+            setError(null);
+            setGeneratedImage(null);
+
+            const result = await fal.subscribe("fal-ai/flux-pro/v1.1-ultra", {
+                input: {
+                    prompt: generatedPrompt,
+                    num_images: 1,
+                    aspect_ratio: "16:9"
+                }
+            });
+
+            if (result.data.images && result.data.images.length > 0) {
+                setGeneratedImage(result.data.images[0].url);
+            } else {
+                setError("No image was generated");
+            }
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Failed to generate image");
+            console.error("Image generation error:", err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -151,13 +193,45 @@ export default function VariantCreator({ formula }: VariantCreatorProps) {
                     </div>
                 </div>
 
-                <div className="flex gap-4">
-                    <button
-                        type="submit"
-                        className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md"
-                    >
-                        Variante generieren
-                    </button>
+                <div className="space-y-4">
+                    <div className="flex gap-4">
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded-md"
+                        >
+                            {isLoading ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Generiere Bild...
+                                </span>
+                            ) : (
+                                "Variante generieren"
+                            )}
+                        </button>
+                    </div>
+
+                    {error && (
+                        <div className="p-4 bg-red-100 text-red-700 rounded-md">
+                            {error}
+                        </div>
+                    )}
+
+                    {generatedImage && (
+                        <div className="mt-4">
+                            <h3 className="text-lg font-semibold mb-2">Generiertes Bild</h3>
+                            <div className="relative aspect-video rounded-lg overflow-hidden">
+                                <img
+                                    src={generatedImage}
+                                    alt="Generated variant"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </form>
         </div>
