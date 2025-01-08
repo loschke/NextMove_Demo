@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Example {
     filename: string;
@@ -32,7 +33,13 @@ interface PromptDetailPanelProps {
 }
 
 export default function PromptDetailPanel({ isOpen, onClose, formula }: PromptDetailPanelProps) {
+    const router = useRouter();
+
     if (!isOpen || !formula) return null;
+
+    const handleVariantClick = () => {
+        router.push(`/prompts/${formula.id}`);
+    };
 
     return (
         <div className="fixed inset-y-0 right-0 w-1/3 bg-background border-l border-border shadow-xl p-6 overflow-y-auto">
@@ -73,6 +80,15 @@ export default function PromptDetailPanel({ isOpen, onClose, formula }: PromptDe
                             />
                         ))}
                     </div>
+                </div>
+
+                <div className="flex justify-center">
+                    <button
+                        onClick={handleVariantClick}
+                        className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors w-full"
+                    >
+                        Varianten generieren
+                    </button>
                 </div>
             </div>
         </div>

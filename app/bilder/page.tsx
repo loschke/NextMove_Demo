@@ -6,7 +6,6 @@ import imagePromptsData from '../data/image_prompts_v2.json';
 // Type assertion for the imported JSON data
 const imagePrompts = imagePromptsData as PromptFormula[];
 import PromptDetailPanel from '../components/PromptDetailPanel';
-import VariantCreator from '../components/VariantCreator';
 import FavoriteButton from '../components/FavoriteButton';
 
 interface Example {
@@ -39,16 +38,10 @@ interface PromptFormula {
 export default function Bilder() {
     const [selectedFormula, setSelectedFormula] = useState<PromptFormula | null>(null);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
-    const [isVariantCreatorOpen, setIsVariantCreatorOpen] = useState(false);
 
     const handleFormulaClick = (formula: PromptFormula) => {
         setSelectedFormula(formula);
         setIsPanelOpen(true);
-    };
-
-    const handleVariantCreate = (formula: PromptFormula) => {
-        setSelectedFormula(formula);
-        setIsVariantCreatorOpen(true);
     };
 
     return (
@@ -80,16 +73,7 @@ export default function Bilder() {
                                     imageUrl={formula.Beispiele[0]?.url}
                                     category={formula["Medium / Typ"]}
                                 />
-                                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4">
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleVariantCreate(formula);
-                                        }}
-                                        className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
-                                    >
-                                        Neue Variante erstellen
-                                    </button>
+                                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                     <span className="text-white text-lg font-medium">Details anzeigen</span>
                                 </div>
                             </div>
@@ -105,13 +89,6 @@ export default function Bilder() {
                 onClose={() => setIsPanelOpen(false)}
                 formula={selectedFormula}
             />
-
-            {isVariantCreatorOpen && selectedFormula && (
-                <VariantCreator
-                    formula={selectedFormula}
-                    onClose={() => setIsVariantCreatorOpen(false)}
-                />
-            )}
         </div>
     );
 }
