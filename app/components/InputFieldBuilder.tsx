@@ -1,8 +1,23 @@
 'use client';
 
 import { useState } from 'react';
-import { InputFieldForm, InputTypeOption } from '../types/quicktasks';
 import { PlusCircle, X, GripVertical, Edit2, Check, Trash2 } from 'lucide-react';
+
+export interface InputTypeOption {
+    value: 'text' | 'textarea' | 'select' | 'checkbox';
+    label: string;
+    icon: string;
+}
+
+export interface InputFieldForm {
+    id: string;
+    label: string;
+    type: InputTypeOption['value'];
+    placeholder?: string;
+    required: boolean;
+    options: string[];
+    isEditing: boolean;
+}
 
 const INPUT_TYPES: InputTypeOption[] = [
     { value: 'text', label: 'Text', icon: '📝' },

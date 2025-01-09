@@ -6,18 +6,12 @@ import { useState, useEffect } from 'react';
 import { useChatPrompts } from '../hooks/useChatPrompts';
 
 interface Assistant {
-    title: string;
+    id: string;
+    name: string;
+    role: string;
+    avatar: string;
     description: string;
-    category: string;
-    icon: string;
-    inputs?: {
-        id: string;
-        label: string;
-        type: string;
-        placeholder?: string;
-        required: boolean;
-        options?: string[];
-    }[];
+    expertise: string[];
 }
 
 export default function Chat() {
@@ -34,7 +28,7 @@ export default function Chat() {
 
     useEffect(() => {
         setIsLoadingAssistants(true);
-        fetch('/api/assistants')
+        fetch('/api/chat-personas')
             .then(res => res.json())
             .then(data => setAssistants(data.assistants))
             .catch(err => console.error('Error loading assistants:', err))
@@ -47,7 +41,7 @@ export default function Chat() {
         setMessages([{
             id: 'welcome',
             role: 'assistant',
-            content: `Hallo! Ich bin ${assistant.title}. ${assistant.description} Wie kann ich dir heute helfen?`
+            content: `Hallo! Ich bin ${assistant.name}. ${assistant.description} Wie kann ich dir heute helfen?`
         }]);
     };
 
@@ -118,7 +112,7 @@ export default function Chat() {
                                         ) : (
                                             <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-100">
                                                 {selectedAssistant ? (
-                                                    <span className="text-lg">{selectedAssistant.icon}</span>
+                                                    <span className="text-lg">{selectedAssistant.avatar}</span>
                                                 ) : (
                                                     <Bot className="w-5 h-5 text-gray-600" />
                                                 )}
@@ -164,8 +158,8 @@ export default function Chat() {
                                     <span className="text-sm whitespace-nowrap">
                                         {selectedAssistant ? (
                                             <span className="flex items-center gap-1">
-                                                <span className="text-lg">{selectedAssistant.icon}</span>
-                                                {selectedAssistant.title}
+                                                <span className="text-lg">{selectedAssistant.avatar}</span>
+                                                {selectedAssistant.name}
                                             </span>
                                         ) : (
                                             'Experte'
@@ -186,38 +180,10 @@ export default function Chat() {
                                 <input
                                     className="w-full p-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     value={input}
-                                    placeholder={selectedAssistant ? `Schreibe eine Nachricht an ${selectedAssistant.title}...` : "Schreibe eine Nachricht..."}
+                                    placeholder={selectedAssistant ? `Schreibe eine Nachricht an ${selectedAssistant.name}...` : "Schreibe eine Nachricht..."}
                                     onChange={handleInputChange}
                                     disabled={isLoading}
                                 />
-                                <div className="absolute -top-8 left-0 flex gap-2">
-                                    {!selectedAssistant && (
-                                        <>
-                                            <button
-                                                onClick={() => handleAssistantSelect({
-                                                    title: "Marketing Experte",
-                                                    description: "Hilft bei Marketing-Aufgaben",
-                                                    category: "Marketing",
-                                                    icon: "📢"
-                                                })}
-                                                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
-                                            >
-                                                Marketing 📢
-                                            </button>
-                                            <button
-                                                onClick={() => handleAssistantSelect({
-                                                    title: "SEO Experte",
-                                                    description: "Hilft bei SEO-Optimierung",
-                                                    category: "SEO",
-                                                    icon: "🔍"
-                                                })}
-                                                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
-                                            >
-                                                SEO 🔍
-                                            </button>
-                                        </>
-                                    )}
-                                </div>
                             </div>
                             <button
                                 type="submit"
@@ -277,18 +243,25 @@ export default function Chat() {
                         )}
                         {assistants.map((assistant) => (
                             <button
-                                key={assistant.title}
+                                key={assistant.id}
                                 onClick={() => handleAssistantSelect(assistant)}
-                                className={`w-full flex flex-col p-4 border rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-left ${selectedAssistant?.title === assistant.title ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
+                                className={`w-full flex flex-col p-4 border rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-left ${selectedAssistant?.id === assistant.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
                             >
                                 <div className="flex items-center gap-3 mb-2">
-                                    <span className="text-2xl">{assistant.icon}</span>
+                                    <span className="text-2xl">{assistant.avatar}</span>
                                     <div>
-                                        <h3 className="font-medium text-gray-900">{assistant.title}</h3>
-                                        <p className="text-sm text-gray-600">{assistant.category}</p>
+                                        <h3 className="font-medium text-gray-900">{assistant.name}</h3>
+                                        <p className="text-sm text-gray-600">{assistant.role}</p>
                                     </div>
                                 </div>
                                 <p className="text-sm text-gray-600 mb-2">{assistant.description}</p>
+                                <div className="flex flex-wrap gap-1">
+                                    {assistant.expertise.map((exp, idx) => (
+                                        <span key={idx} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                                            {exp}
+                                        </span>
+                                    ))}
+                                </div>
                             </button>
                         ))}
                     </div>

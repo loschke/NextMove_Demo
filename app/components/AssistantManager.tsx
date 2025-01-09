@@ -54,13 +54,13 @@ export default function AssistantManager() {
             {!isCreating ? (
                 <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                        <h3 className="text-lg font-medium text-gray-900">Meine Quicktasks</h3>
+                        <h3 className="text-lg font-medium text-gray-900">Meine Assistenten</h3>
                         <button
                             onClick={() => setIsCreating(true)}
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
                         >
                             <Plus className="w-4 h-4 mr-2" />
-                            Neue Quicktask
+                            Neuer Assistent
                         </button>
                     </div>
 
@@ -79,14 +79,14 @@ export default function AssistantManager() {
                                         <button
                                             onClick={() => startEditing(assistant)}
                                             className="text-gray-400 hover:text-gray-600"
-                                            aria-label="Quicktask bearbeiten"
+                                            aria-label="Assistent bearbeiten"
                                         >
                                             <Edit2 className="w-4 h-4" />
                                         </button>
                                         <button
                                             onClick={() => deleteAssistant(assistant.id)}
                                             className="text-gray-400 hover:text-red-600"
-                                            aria-label="Quicktask löschen"
+                                            aria-label="Assistent löschen"
                                         >
                                             <Trash2 className="w-4 h-4" />
                                         </button>
@@ -114,7 +114,7 @@ export default function AssistantManager() {
                     <div className="bg-white rounded-lg shadow p-6">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-medium text-gray-900">
-                                {editingAssistant.id ? 'Quicktask bearbeiten' : 'Neue Quicktask'}
+                                {editingAssistant.id ? 'Assistent bearbeiten' : 'Neuer Assistent'}
                             </h3>
                             <button
                                 type="button"
@@ -138,7 +138,7 @@ export default function AssistantManager() {
                         <div className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
-                                    Name der Quicktask
+                                    Name des Assistenten
                                 </label>
                                 <input
                                     type="text"
@@ -158,7 +158,7 @@ export default function AssistantManager() {
                                     onChange={(e) => setEditingAssistant(prev => ({ ...prev, description: e.target.value }))}
                                     rows={3}
                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                    placeholder="Beschreiben Sie die Hauptaufgabe der Quicktask"
+                                    placeholder="Beschreiben Sie die Hauptaufgabe des Assistenten"
                                 />
                             </div>
 
@@ -216,7 +216,7 @@ export default function AssistantManager() {
                         <h3 className="text-lg font-medium text-gray-900 mb-4">System Prompt</h3>
                         <div className="space-y-4">
                             <p className="text-sm text-gray-600">
-                                Definieren Sie hier das Verhalten und die Fähigkeiten der Quicktask.
+                                Definieren Sie hier das Verhalten und die Fähigkeiten des Assistenten.
                                 Nutzen Sie {"{feldname}"} um auf die Eingabefelder zu verweisen.
                             </p>
                             <textarea
@@ -235,7 +235,7 @@ export default function AssistantManager() {
                             type="submit"
                             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         >
-                            {editingAssistant.id ? 'Änderungen speichern' : 'Quicktask erstellen'}
+                            {editingAssistant.id ? 'Änderungen speichern' : 'Assistent erstellen'}
                         </button>
                     </div>
                 </form>
