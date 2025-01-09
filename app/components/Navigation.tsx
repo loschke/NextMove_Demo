@@ -26,8 +26,10 @@ export function Sidebar() {
     return (
         <aside className="bg-white w-64 min-h-screen border-r">
             <div className="p-4 border-b">
-                <h2 className="text-xl font-bold">NextMove</h2>
-                <p className="text-sm text-gray-600">AI Marketing Assistant</p>
+                <Link href="/" className="block hover:opacity-80">
+                    <h2 className="text-xl font-bold">NextMoveAI</h2>
+                    <p className="text-sm text-gray-600">Living Prompts for Marketing</p>
+                </Link>
             </div>
             <nav className="flex flex-col h-[calc(100vh-6rem)]">
                 <div className="p-4 flex-grow">
@@ -36,8 +38,8 @@ export function Sidebar() {
                             key={item.href}
                             href={item.href}
                             className={`flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 ${pathname === item.href
-                                ? "bg-blue-50 text-blue-600"
-                                : "text-gray-700 hover:bg-gray-100"
+                                ? "bg-pink-50 text-[#FA186B]"
+                                : "text-gray-700 hover:bg-orange-50"
                                 }`}
                         >
                             <span className="text-xl">{item.icon}</span>
@@ -53,8 +55,8 @@ export function Sidebar() {
                             key={item.href}
                             href={item.href}
                             className={`flex items-center space-x-3 px-4 py-3 rounded-lg mb-2 ${pathname === item.href
-                                ? "bg-blue-50 text-blue-600"
-                                : "text-gray-700 hover:bg-gray-100"
+                                ? "bg-pink-50 text-[#FA186B]"
+                                : "text-gray-700 hover:bg-orange-50"
                                 }`}
                         >
                             <span className="text-xl">{item.icon}</span>
@@ -68,15 +70,40 @@ export function Sidebar() {
 }
 
 export function Header() {
+    const pathname = usePathname();
     return (
         <header className="bg-white border-b">
-            <div className="flex justify-end items-center h-16 px-6">
+            <div className="flex justify-between items-center h-16 px-6">
+                {/* Static Navigation */}
+                <div className="flex-1 flex justify-center">
+                    <nav className="flex space-x-12">
+                        <Link
+                            href="/static/was"
+                            className={`text-sm font-medium px-3 py-2 transition-all duration-200 ${pathname === '/static/was'
+                                ? 'text-[#FA186B] border-b-2 border-[#FA186B]'
+                                : 'text-gray-700 hover:text-[#FA186B] hover:border-b-2 hover:border-[#FF7B00]'
+                                }`}
+                        >
+                            Problem & Lösung
+                        </Link>
+                        <Link
+                            href="/static/warum"
+                            className={`text-sm font-medium px-3 py-2 transition-all duration-200 ${pathname === '/static/warum'
+                                ? 'text-[#FA186B] border-b-2 border-[#FA186B]'
+                                : 'text-gray-700 hover:text-[#FA186B] hover:border-b-2 hover:border-[#FF7B00]'
+                                }`}
+                        >
+                            Unser Vorteil
+                        </Link>
+                    </nav>
+                </div>
+                {/* User Menu */}
                 <div className="flex items-center space-x-4">
                     <button className="text-gray-600 hover:text-gray-800">
                         <span className="text-xl">🔔</span>
                     </button>
                     <div className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                        <div className="w-8 h-8 bg-gradient-to-br from-[#FA186B] to-[#FF7B00] rounded-full flex items-center justify-center text-white">
                             U
                         </div>
                         <span className="text-gray-700">User</span>
