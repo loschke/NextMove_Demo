@@ -3,6 +3,8 @@ export interface CustomPrompt {
     title: string;
     prompt: string;
     category: string;
+    description?: string;
+    useCase?: string;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;
@@ -10,9 +12,12 @@ export interface CustomPrompt {
 
 export interface PromptCategory {
     name: string;
+    description: string;
     prompts: {
         title: string;
         prompt: string;
+        description: string;
+        useCase: string;
     }[];
 }
 

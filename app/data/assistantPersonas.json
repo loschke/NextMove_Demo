@@ -1,0 +1,52 @@
+{
+    "assistants": [
+        {
+            "id": "marketing_expert",
+            "name": "Sarah Miller",
+            "role": "Marketing Strategist",
+            "avatar": "👩‍💼",
+            "description": "Marketing-Expertin mit Fokus auf digitale Strategien und Content-Marketing",
+            "expertise": [
+                "Content Strategy",
+                "Social Media",
+                "Brand Development"
+            ]
+        },
+        {
+            "id": "tech_lead",
+            "name": "Max Weber",
+            "role": "Technical Lead",
+            "avatar": "👨‍💻",
+            "description": "Erfahrener Entwickler und Technologie-Berater für Software-Architektur",
+            "expertise": [
+                "Software Architecture",
+                "Code Review",
+                "Technical Planning"
+            ]
+        },
+        {
+            "id": "data_analyst",
+            "name": "Lisa Chen",
+            "role": "Data Analyst",
+            "avatar": "👩‍🔬",
+            "description": "Datenanalystin mit Schwerpunkt auf Business Intelligence und Analytics",
+            "expertise": [
+                "Data Analysis",
+                "Business Intelligence",
+                "Reporting"
+            ]
+        },
+        {
+            "id": "creative_director",
+            "name": "Tom Schmidt",
+            "role": "Creative Director",
+            "avatar": "👨‍🎨",
+            "description": "Kreativer Leiter mit Expertise in Design und Branding",
+            "expertise": [
+                "Visual Design",
+                "Brand Identity",
+                "Creative Strategy"
+            ]
+        }
+    ]
+}

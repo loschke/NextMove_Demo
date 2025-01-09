@@ -2,40 +2,55 @@
     "categories": [
         {
             "name": "Marketing",
+            "description": "Prompts für Marketing-Strategien und Content-Erstellung",
             "prompts": [
                 {
                     "title": "Content Strategie",
-                    "prompt": "Entwickle eine Content-Strategie für Social Media, die auf B2B Marketing ausgerichtet ist."
+                    "description": "Entwicklung einer zielgerichteten Content-Strategie für B2B Social Media Marketing. Ideal für die Planung von LinkedIn und XING Kampagnen.",
+                    "useCase": "Perfekt für Marketing Manager, die ihre B2B Social Media Präsenz strategisch aufbauen möchten.",
+                    "prompt": "Entwickle eine Content-Strategie für Social Media, die auf B2B Marketing ausgerichtet ist. Berücksichtige dabei verschiedene Content-Formate, Posting-Frequenz und KPIs."
                 },
                 {
                     "title": "SEO Analyse",
-                    "prompt": "Analysiere diese Keywords für unsere Website und schlage Verbesserungen vor:"
+                    "description": "Detaillierte Keyword-Analyse und Optimierungsvorschläge für besseres Ranking in Suchmaschinen.",
+                    "useCase": "Geeignet für Content Manager und SEO-Verantwortliche zur Optimierung der Website-Performance.",
+                    "prompt": "Analysiere diese Keywords für unsere Website und schlage Verbesserungen vor. Berücksichtige dabei Suchvolumen, Wettbewerb und User Intent."
                 }
             ]
         },
         {
             "name": "Kundenservice",
+            "description": "Prompts zur Verbesserung der Kundenbetreuung und Support-Prozesse",
             "prompts": [
                 {
                     "title": "FAQ Generator",
-                    "prompt": "Erstelle eine Liste häufig gestellter Fragen und Antworten für unser Produkt."
+                    "description": "Automatische Erstellung von häufig gestellten Fragen und ausführlichen Antworten für Ihr Produkt oder Ihre Dienstleistung.",
+                    "useCase": "Ideal für Support-Teams zur Erstellung einer umfassenden Wissensdatenbank.",
+                    "prompt": "Erstelle eine Liste häufig gestellter Fragen und detaillierter Antworten für unser Produkt. Berücksichtige dabei typische Kundenanliegen und technische Aspekte."
                 },
                 {
                     "title": "Email Templates",
-                    "prompt": "Generiere professionelle Email-Vorlagen für Kundenanfragen."
+                    "description": "Professionelle E-Mail-Vorlagen für verschiedene Kundenanfragen und Support-Szenarien.",
+                    "useCase": "Perfekt für Kundenservice-Teams zur Standardisierung der Kommunikation.",
+                    "prompt": "Generiere professionelle Email-Vorlagen für verschiedene Kundenanfragen, einschließlich Begrüßung, Problemlösung und Follow-up."
                 }
             ]
         },
         {
             "name": "Produktentwicklung",
+            "description": "Prompts für agile Produktentwicklung und Feature-Planning",
             "prompts": [
                 {
                     "title": "Feature Brainstorming",
-                    "prompt": "Lass uns Ideen für neue Features entwickeln, die unseren Nutzern helfen könnten."
+                    "description": "Kreative Ideenfindung für neue Produktfeatures basierend auf Nutzeranforderungen und Markttrends.",
+                    "useCase": "Optimal für Product Owner und Entwicklungsteams in der Konzeptionsphase.",
+                    "prompt": "Lass uns innovative Ideen für neue Features entwickeln, die unseren Nutzern einen echten Mehrwert bieten. Berücksichtige dabei aktuelle Technologietrends und Nutzerfeedback."
                 },
                 {
                     "title": "User Stories",
-                    "prompt": "Erstelle User Stories für folgende Produktfunktion:"
+                    "description": "Strukturierte Erstellung von User Stories nach agilem Format für klare Anforderungsdefinition.",
+                    "useCase": "Wichtig für Scrum Teams und Product Owner zur Definition von Entwicklungsaufgaben.",
+                    "prompt": "Erstelle detaillierte User Stories für folgende Produktfunktion im Format: 'Als [Rolle] möchte ich [Funktion], damit [Nutzen]'. Füge Akzeptanzkriterien hinzu."
                 }
             ]
         }

@@ -9,12 +9,15 @@ interface ChatPrompt {
     title: string;
     prompt: string;
     category: string;
+    description: string;
+    useCase: string;
     isCustom?: boolean;
     isActive?: boolean;
 }
 
 export function useChatPrompts() {
     const [allPrompts, setAllPrompts] = useState<ChatPrompt[]>([]);
+    const [promptsByCategory, setPromptsByCategory] = useState<Record<string, { description: string; length: number; prompts: ChatPrompt[] }>>({});
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -38,6 +41,8 @@ export function useChatPrompts() {
                             title: prompt.title,
                             prompt: prompt.prompt,
                             category: category.name,
+                            description: prompt.description,
+                            useCase: prompt.useCase,
                             isCustom: false,
                         }))
                     ),
@@ -46,12 +51,32 @@ export function useChatPrompts() {
                         title: prompt.title,
                         prompt: prompt.prompt,
                         category: prompt.category,
+                        description: prompt.description || 'Benutzerdefinierter Prompt',
+                        useCase: prompt.useCase || 'Individuell angepasst für Ihre Bedürfnisse',
                         isCustom: true,
                         isActive: prompt.isActive,
                     }))
                 ];
 
+                // Group prompts by category with category description
+                const groupedPrompts = defaultPrompts.categories.reduce<Record<string, { description: string; length: number; prompts: ChatPrompt[] }>>((acc, category) => {
+                    // Initialize category with its description from defaultPrompts
+                    acc[category.name] = {
+                        description: category.description,
+                        length: 0,
+                        prompts: []
+                    };
+
+                    // Find all prompts for this category
+                    const categoryPrompts = combinedPrompts.filter(p => p.category === category.name);
+                    acc[category.name].prompts = categoryPrompts;
+                    acc[category.name].length = categoryPrompts.length;
+
+                    return acc;
+                }, {});
+
                 setAllPrompts(combinedPrompts);
+                setPromptsByCategory(groupedPrompts);
                 setIsLoading(false);
             } catch (error) {
                 console.error('Failed to load prompts:', error);
@@ -61,15 +86,6 @@ export function useChatPrompts() {
 
         loadPrompts();
     }, []);
-
-    // Group prompts by category
-    const promptsByCategory = allPrompts.reduce<Record<string, ChatPrompt[]>>((acc, prompt) => {
-        if (!acc[prompt.category]) {
-            acc[prompt.category] = [];
-        }
-        acc[prompt.category].push(prompt);
-        return acc;
-    }, {});
 
     return {
         prompts: allPrompts,

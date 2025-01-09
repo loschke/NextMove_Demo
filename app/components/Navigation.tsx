@@ -12,7 +12,8 @@ export function Sidebar() {
         { href: "/chat", label: "Chat", icon: "💬" },
         { href: "/bilder", label: "Bilder", icon: "🖼️" },
         { href: "/agenten", label: "Agenten", icon: "👥" },
-        { href: "/multimedia", label: "Multimedia", icon: "🛠️" },
+        { href: "/multimedia", label: "Multimedia", icon: "🎥" },
+        { href: "/tools", label: "Tools", icon: "🛠️" },
     ];
 
     const adminItems = [

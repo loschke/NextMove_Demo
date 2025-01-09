@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { InputFieldForm, InputTypeOption } from '../types/assistants';
+import { InputFieldForm, InputTypeOption } from '../types/quicktasks';
 import { PlusCircle, X, GripVertical, Edit2, Check, Trash2 } from 'lucide-react';
 
 const INPUT_TYPES: InputTypeOption[] = [

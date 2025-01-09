@@ -5,7 +5,7 @@ import { addFavorite, removeFavorite, isFavorite } from '../utils/favorites';
 
 interface FavoriteButtonProps {
     id: string;
-    type: 'assistant' | 'image' | 'multimedia';
+    type: 'assistant' | 'image' | 'multimedia' | 'quicktask';
     title: string;
     description: string;
     icon?: string;

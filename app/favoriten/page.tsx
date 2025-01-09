@@ -6,7 +6,7 @@ import FavoriteCard from '../components/FavoriteCard';
 
 export default function Favoriten() {
     const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
-    const [selectedType, setSelectedType] = useState<'all' | 'assistant' | 'image' | 'multimedia'>('all');
+    const [selectedType, setSelectedType] = useState<'all' | 'quicktask' | 'image' | 'multimedia'>('all');
 
     useEffect(() => {
         // Update favorites when component mounts and when items are added/removed
@@ -43,7 +43,7 @@ export default function Favoriten() {
                 </p>
 
                 <div className="flex flex-wrap gap-2 justify-center mb-8">
-                    {(['all', 'assistant', 'image', 'multimedia'] as const).map((type) => (
+                    {(['all', 'quicktask', 'image', 'multimedia'] as const).map((type) => (
                         <button
                             key={type}
                             onClick={() => setSelectedType(type)}
@@ -53,7 +53,7 @@ export default function Favoriten() {
                                     : 'bg-gray-100 hover:bg-gray-200'}`}
                         >
                             {type === 'all' ? 'Alle' :
-                                type === 'assistant' ? 'Assistenten' :
+                                type === 'quicktask' ? 'Quicktasks' :
                                     type === 'image' ? 'Bilder' : 'Multimedia'}
                         </button>
                     ))}

@@ -1,6 +1,6 @@
 export interface FavoriteItem {
     id: string;
-    type: 'assistant' | 'image' | 'multimedia';
+    type: 'assistant' | 'image' | 'multimedia' | 'quicktask';
     title: string;
     description: string;
     icon?: string;

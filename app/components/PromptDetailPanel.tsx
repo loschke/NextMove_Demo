@@ -1,20 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { X } from 'lucide-react';
 
 interface Example {
     filename: string;
     url: string;
-}
-
-interface Placeholder {
-    id: string;
-    name: string;
-    beschreibung: string;
-    beispiele: string[];
-    erforderlich: boolean;
-    typ: 'select' | 'text';
 }
 
 interface PromptFormula {
@@ -22,7 +13,6 @@ interface PromptFormula {
     Name: string;
     Beschreibung: string;
     "Prompt Formel": string;
-    Platzhalter: Placeholder[];
     Beispiele: Example[];
 }
 
@@ -35,62 +25,64 @@ interface PromptDetailPanelProps {
 export default function PromptDetailPanel({ isOpen, onClose, formula }: PromptDetailPanelProps) {
     const router = useRouter();
 
-    if (!isOpen || !formula) return null;
+    if (!formula) return null;
 
     const handleVariantClick = () => {
         router.push(`/prompts/${formula.id}`);
     };
 
     return (
-        <div className="fixed inset-y-0 right-0 w-1/3 bg-background border-l border-border shadow-xl p-6 overflow-y-auto">
-            <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">{formula.Name}</h2>
-                <button
-                    onClick={onClose}
-                    className="p-2 hover:bg-accent rounded-full"
-                    aria-label="Close panel"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
+        <>
+            {/* Overlay */}
+            <div
+                className={`fixed inset-0 bg-black/20 transition-opacity duration-300 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                style={{ zIndex: 40 }}
+                onClick={onClose}
+            />
 
-            <div className="space-y-6">
-                <div>
-                    <h3 className="text-lg font-semibold mb-2">Beschreibung</h3>
-                    <p className="whitespace-pre-line text-muted-foreground">{formula.Beschreibung}</p>
+            {/* Panel */}
+            <aside className={`fixed right-0 top-16 bottom-0 w-96 bg-white p-6 overflow-y-auto transform transition-transform duration-300 ease-in-out border-l shadow-xl z-50 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-lg font-semibold text-gray-900">{formula.Name}</h2>
+                    <button
+                        onClick={onClose}
+                        className="text-gray-500 hover:text-gray-700"
+                        aria-label="Schließen"
+                    >
+                        <X className="w-5 h-5" />
+                    </button>
                 </div>
 
-                <div>
-                    <h3 className="text-lg font-semibold mb-2">Prompt Formel</h3>
-                    <p className="whitespace-pre-line bg-accent p-4 rounded-lg">{formula["Prompt Formel"]}</p>
-                </div>
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-lg font-semibold mb-2">Beschreibung</h3>
+                        <p className="text-gray-600 whitespace-pre-line">{formula.Beschreibung}</p>
+                    </div>
 
-                <div>
-                    <h3 className="text-lg font-semibold mb-4">Beispiele</h3>
-                    <div className="grid grid-cols-2 gap-4">
-                        {formula.Beispiele.map((example, index) => (
+                    <div>
+                        <h3 className="text-lg font-semibold mb-2">Prompt Formel</h3>
+                        <p className="whitespace-pre-line bg-gray-50 p-4 rounded-lg text-gray-700">{formula["Prompt Formel"]}</p>
+                    </div>
+
+                    {formula.Beispiele && formula.Beispiele.length > 0 && (
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Beispiel</h3>
                             <img
-                                key={index}
-                                src={example.url}
-                                alt={example.filename}
+                                src={formula.Beispiele[0].url}
+                                alt={formula.Beispiele[0].filename}
                                 className="w-full h-auto rounded-lg"
                             />
-                        ))}
-                    </div>
-                </div>
+                        </div>
+                    )}
 
-                <div className="flex justify-center">
                     <button
                         onClick={handleVariantClick}
-                        className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors w-full"
+                        className="w-full mt-6 px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                     >
                         Varianten generieren
                     </button>
                 </div>
-            </div>
-        </div>
+            </aside>
+        </>
     );
 }

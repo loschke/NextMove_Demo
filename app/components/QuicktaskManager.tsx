@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { CustomAssistant, InputFieldForm } from '../types/assistants';
+import { CustomQuicktask, InputFieldForm } from '../types/quicktasks';
 import InputFieldBuilder from './InputFieldBuilder';
-import { useCustomAssistants } from '../hooks/useCustomAssistants';
+import { useCustomQuicktasks } from '../hooks/useCustomQuicktasks';
 import { Edit2, Trash2, Plus } from 'lucide-react';
 
-export default function AssistantManager() {
-    const { assistants, addAssistant, updateAssistant, deleteAssistant, toggleAssistantActive } = useCustomAssistants();
-    const [editingAssistant, setEditingAssistant] = useState<Partial<CustomAssistant>>({
+export default function QuicktaskManager() {
+    const { quicktasks, addQuicktask, updateQuicktask, deleteQuicktask, toggleQuicktaskActive } = useCustomQuicktasks();
+    const [editingQuicktask, setEditingQuicktask] = useState<Partial<CustomQuicktask>>({
         title: '',
         description: '',
         category: '',
@@ -21,12 +21,12 @@ export default function AssistantManager() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (editingAssistant.id) {
-            updateAssistant(editingAssistant.id, editingAssistant);
+        if (editingQuicktask.id) {
+            updateQuicktask(editingQuicktask.id, editingQuicktask);
         } else {
-            addAssistant(editingAssistant as Omit<CustomAssistant, 'id' | 'createdAt' | 'updatedAt'>);
+            addQuicktask(editingQuicktask as Omit<CustomQuicktask, 'id' | 'createdAt' | 'updatedAt'>);
         }
-        setEditingAssistant({
+        setEditingQuicktask({
             title: '',
             description: '',
             category: '',
@@ -39,11 +39,11 @@ export default function AssistantManager() {
     };
 
     const handleInputFieldsChange = (fields: InputFieldForm[]) => {
-        setEditingAssistant(prev => ({ ...prev, inputs: fields }));
+        setEditingQuicktask(prev => ({ ...prev, inputs: fields }));
     };
 
-    const startEditing = (assistant: CustomAssistant) => {
-        setEditingAssistant(assistant);
+    const startEditing = (quicktask: CustomQuicktask) => {
+        setEditingQuicktask(quicktask);
         setIsCreating(true);
     };
 
@@ -58,6 +58,7 @@ export default function AssistantManager() {
                         <button
                             onClick={() => setIsCreating(true)}
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                            aria-label="Neue Quicktask erstellen"
                         >
                             <Plus className="w-4 h-4 mr-2" />
                             Neue Quicktask
@@ -65,26 +66,26 @@ export default function AssistantManager() {
                     </div>
 
                     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {assistants.map((assistant) => (
-                            <div key={assistant.id} className="bg-white rounded-lg shadow p-4">
+                        {quicktasks.map((quicktask) => (
+                            <div key={quicktask.id} className="bg-white rounded-lg shadow p-4">
                                 <div className="flex items-start justify-between">
                                     <div className="flex items-center space-x-3">
-                                        <span className="text-2xl">{assistant.icon}</span>
+                                        <span className="text-2xl">{quicktask.icon}</span>
                                         <div>
-                                            <h4 className="font-medium text-gray-900">{assistant.title}</h4>
-                                            <p className="text-sm text-gray-500">{assistant.category}</p>
+                                            <h4 className="font-medium text-gray-900">{quicktask.title}</h4>
+                                            <p className="text-sm text-gray-500">{quicktask.category}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center space-x-2">
                                         <button
-                                            onClick={() => startEditing(assistant)}
+                                            onClick={() => startEditing(quicktask)}
                                             className="text-gray-400 hover:text-gray-600"
                                             aria-label="Quicktask bearbeiten"
                                         >
                                             <Edit2 className="w-4 h-4" />
                                         </button>
                                         <button
-                                            onClick={() => deleteAssistant(assistant.id)}
+                                            onClick={() => deleteQuicktask(quicktask.id)}
                                             className="text-gray-400 hover:text-red-600"
                                             aria-label="Quicktask löschen"
                                         >
@@ -92,16 +93,16 @@ export default function AssistantManager() {
                                         </button>
                                     </div>
                                 </div>
-                                <p className="mt-2 text-sm text-gray-600 line-clamp-2">{assistant.description}</p>
+                                <p className="mt-2 text-sm text-gray-600 line-clamp-2">{quicktask.description}</p>
                                 <div className="mt-4">
                                     <button
-                                        onClick={() => toggleAssistantActive(assistant.id)}
-                                        className={`px-3 py-1 rounded-full text-sm ${assistant.isActive
+                                        onClick={() => toggleQuicktaskActive(quicktask.id)}
+                                        className={`px-3 py-1 rounded-full text-sm ${quicktask.isActive
                                             ? 'bg-green-100 text-green-800'
                                             : 'bg-gray-100 text-gray-800'
                                             }`}
                                     >
-                                        {assistant.isActive ? 'Aktiv' : 'Inaktiv'}
+                                        {quicktask.isActive ? 'Aktiv' : 'Inaktiv'}
                                     </button>
                                 </div>
                             </div>
@@ -114,13 +115,13 @@ export default function AssistantManager() {
                     <div className="bg-white rounded-lg shadow p-6">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-medium text-gray-900">
-                                {editingAssistant.id ? 'Quicktask bearbeiten' : 'Neue Quicktask'}
+                                {editingQuicktask.id ? 'Quicktask bearbeiten' : 'Neue Quicktask'}
                             </h3>
                             <button
                                 type="button"
                                 onClick={() => {
                                     setIsCreating(false);
-                                    setEditingAssistant({
+                                    setEditingQuicktask({
                                         title: '',
                                         description: '',
                                         category: '',
@@ -142,8 +143,8 @@ export default function AssistantManager() {
                                 </label>
                                 <input
                                     type="text"
-                                    value={editingAssistant.title}
-                                    onChange={(e) => setEditingAssistant(prev => ({ ...prev, title: e.target.value }))}
+                                    value={editingQuicktask.title}
+                                    onChange={(e) => setEditingQuicktask(prev => ({ ...prev, title: e.target.value }))}
                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                     placeholder="z.B. Content Writer, SEO Analyse"
                                 />
@@ -154,8 +155,8 @@ export default function AssistantManager() {
                                     Beschreibung
                                 </label>
                                 <textarea
-                                    value={editingAssistant.description}
-                                    onChange={(e) => setEditingAssistant(prev => ({ ...prev, description: e.target.value }))}
+                                    value={editingQuicktask.description}
+                                    onChange={(e) => setEditingQuicktask(prev => ({ ...prev, description: e.target.value }))}
                                     rows={3}
                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                     placeholder="Beschreiben Sie die Hauptaufgabe der Quicktask"
@@ -168,8 +169,8 @@ export default function AssistantManager() {
                                 </label>
                                 <input
                                     type="text"
-                                    value={editingAssistant.category}
-                                    onChange={(e) => setEditingAssistant(prev => ({ ...prev, category: e.target.value }))}
+                                    value={editingQuicktask.category}
+                                    onChange={(e) => setEditingQuicktask(prev => ({ ...prev, category: e.target.value }))}
                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                     placeholder="z.B. Content Marketing, SEO"
                                 />
@@ -184,11 +185,12 @@ export default function AssistantManager() {
                                         <button
                                             key={icon}
                                             type="button"
-                                            onClick={() => setEditingAssistant(prev => ({ ...prev, icon }))}
-                                            className={`w-10 h-10 flex items-center justify-center rounded-lg text-xl ${editingAssistant.icon === icon
+                                            onClick={() => setEditingQuicktask(prev => ({ ...prev, icon }))}
+                                            className={`w-10 h-10 flex items-center justify-center rounded-lg text-xl ${editingQuicktask.icon === icon
                                                 ? 'bg-blue-100 border-2 border-blue-500'
                                                 : 'bg-gray-50 hover:bg-gray-100'
                                                 }`}
+                                            aria-label={`Icon ${icon} auswählen`}
                                         >
                                             {icon}
                                         </button>
@@ -202,7 +204,7 @@ export default function AssistantManager() {
                     <div className="bg-white rounded-lg shadow p-6">
                         <h3 className="text-lg font-medium text-gray-900 mb-4">Eingabefelder</h3>
                         <InputFieldBuilder
-                            fields={(editingAssistant.inputs || []).map(input => ({
+                            fields={(editingQuicktask.inputs || []).map(input => ({
                                 ...input,
                                 isEditing: false,
                                 options: input.options || []
@@ -220,8 +222,8 @@ export default function AssistantManager() {
                                 Nutzen Sie {"{feldname}"} um auf die Eingabefelder zu verweisen.
                             </p>
                             <textarea
-                                value={editingAssistant.systemPrompt}
-                                onChange={(e) => setEditingAssistant(prev => ({ ...prev, systemPrompt: e.target.value }))}
+                                value={editingQuicktask.systemPrompt}
+                                onChange={(e) => setEditingQuicktask(prev => ({ ...prev, systemPrompt: e.target.value }))}
                                 rows={6}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 placeholder="Du bist ein Marketing-Assistent. Erstelle Content für {thema} im Stil von {tonalitaet}..."
@@ -235,7 +237,7 @@ export default function AssistantManager() {
                             type="submit"
                             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         >
-                            {editingAssistant.id ? 'Änderungen speichern' : 'Quicktask erstellen'}
+                            {editingQuicktask.id ? 'Änderungen speichern' : 'Quicktask erstellen'}
                         </button>
                     </div>
                 </form>

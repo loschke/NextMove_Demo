@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import imagePromptsData from '../data/image_prompts_v2.json';
+import PromptDetailPanel from '../components/PromptDetailPanel';
+import FavoriteButton from '../components/FavoriteButton';
 
 // Type assertion for the imported JSON data
 const imagePrompts = imagePromptsData as PromptFormula[];
-import PromptDetailPanel from '../components/PromptDetailPanel';
-import FavoriteButton from '../components/FavoriteButton';
 
 interface Example {
     filename: string;
@@ -45,21 +45,23 @@ export default function Bilder() {
     };
 
     return (
-        <div className="p-6">
-            <h1 className="text-4xl font-bold mb-4">Prompt Formeln</h1>
-            <p className="text-xl text-muted-foreground mb-8">
-                Entdecken Sie unsere Sammlung von KI Prompt Formeln für Bildgenerierung.
-            </p>
+        <div className="min-h-[calc(100vh-4rem)] p-6">
+            <header className="text-center mb-8">
+                <h1 className="text-4xl font-bold mb-4">Prompt Formeln</h1>
+                <p className="text-xl text-muted-foreground">
+                    Entdecken Sie unsere Sammlung von KI Prompt Formeln für Bildgenerierung.
+                </p>
+            </header>
 
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 {imagePrompts.map((formula: PromptFormula, index) => (
                     <div
                         key={index}
-                        className="group cursor-pointer relative"
+                        className="group cursor-pointer relative bg-white rounded-xl border hover:shadow-xl transition-all duration-300"
                         onClick={() => handleFormulaClick(formula)}
                     >
                         {formula.Beispiele && formula.Beispiele.length > 0 && (
-                            <div className="relative aspect-square mb-3 overflow-hidden rounded-lg">
+                            <div className="relative aspect-square overflow-hidden rounded-t-xl">
                                 <img
                                     src={formula.Beispiele[0].url}
                                     alt={formula.Name}
@@ -78,8 +80,10 @@ export default function Bilder() {
                                 </div>
                             </div>
                         )}
-                        <h3 className="text-lg font-semibold">{formula.Name}</h3>
-                        <p className="text-muted-foreground line-clamp-2">{formula.Legende}</p>
+                        <div className="p-4">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">{formula.Name}</h3>
+                            <p className="text-sm text-gray-600 line-clamp-2">{formula.Legende}</p>
+                        </div>
                     </div>
                 ))}
             </div>

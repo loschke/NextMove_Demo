@@ -3,74 +3,74 @@
 import { useState } from 'react';
 import FavoriteButton from '../components/FavoriteButton';
 
-export default function MultimediaPage() {
+export default function ToolsPage() {
     const toolClusters = [
         {
-            id: 'youtube',
-            name: 'YouTube Tools',
-            icon: '▶️',
-            description: 'Tools for YouTube content creation and analysis',
+            id: 'language',
+            name: 'Language Tools',
+            icon: '🌍',
+            description: 'Advanced language processing tools',
             tools: [
                 {
-                    id: 'youtube-transcription',
-                    name: 'Video Transcription',
-                    description: 'Generate accurate transcripts from YouTube videos'
+                    id: 'translation',
+                    name: 'Smart Translation',
+                    description: 'Context-aware language translation'
                 },
                 {
-                    id: 'youtube-summary',
-                    name: 'Video Summary',
-                    description: 'Create concise summaries of video content'
+                    id: 'grammar-check',
+                    name: 'Grammar Assistant',
+                    description: 'Advanced grammar and style checking'
                 },
                 {
-                    id: 'youtube-script',
-                    name: 'Script Generator',
-                    description: 'Convert videos into structured scripts'
+                    id: 'language-learning',
+                    name: 'Learning Helper',
+                    description: 'AI-powered language learning tools'
                 }
             ]
         },
         {
-            id: 'video',
-            name: 'Video Tools',
-            icon: '🎥',
-            description: 'Professional video processing tools',
+            id: 'data-conversion',
+            name: 'Data Conversion',
+            icon: '📊',
+            description: 'Convert between different data formats',
             tools: [
                 {
-                    id: 'video-trim',
-                    name: 'Video Trimmer',
-                    description: 'Cut and trim videos with precision'
+                    id: 'csv-json',
+                    name: 'CSV to JSON',
+                    description: 'Convert CSV files to structured JSON format'
                 },
                 {
-                    id: 'video-subtitle',
-                    name: 'Subtitle Generator',
-                    description: 'Create and edit video subtitles'
+                    id: 'xml-json',
+                    name: 'XML to JSON',
+                    description: 'Transform XML documents into JSON format'
                 },
                 {
-                    id: 'video-compress',
-                    name: 'Video Compressor',
-                    description: 'Compress videos while maintaining quality'
+                    id: 'excel-json',
+                    name: 'Excel to JSON',
+                    description: 'Convert Excel spreadsheets to JSON data'
                 }
             ]
         },
         {
-            id: 'audio',
-            name: 'Audio Tools',
-            icon: '🎙️',
-            description: 'Professional audio processing tools',
+            id: 'web-data',
+            name: 'Web Data Tools',
+            icon: '🌐',
+            description: 'Extract and process web data',
             tools: [
                 {
-                    id: 'audio-transcription',
-                    name: 'Audio Transcription',
-                    description: 'Convert audio files to text with high accuracy'
+                    id: 'web-scraping',
+                    name: 'Web Scraping',
+                    description: 'Extract structured data from websites'
                 },
                 {
-                    id: 'text-to-speech',
-                    name: 'Text to Speech',
-                    description: 'Convert text to natural-sounding audio'
+                    id: 'table-extractor',
+                    name: 'Table Extractor',
+                    description: 'Extract and convert web tables to structured data'
                 },
                 {
-                    id: 'audio-editing',
-                    name: 'Audio Enhancement',
-                    description: 'Improve audio quality and clarity'
+                    id: 'api-tester',
+                    name: 'API Tester',
+                    description: 'Test and validate API endpoints'
                 }
             ]
         }
@@ -78,7 +78,7 @@ export default function MultimediaPage() {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-6">Multimedia</h1>
+            <h1 className="text-2xl font-bold mb-6">Tools</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {toolClusters.map((cluster) => (
                     <div
