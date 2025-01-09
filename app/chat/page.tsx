@@ -95,7 +95,7 @@ export default function Chat() {
                                             className="group px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all flex items-center justify-center gap-2 shadow-sm hover:scale-[1.02]"
                                         >
                                             <Users className="w-5 h-5" />
-                                            <span>Assistenten auswählen</span>
+                                            <span>Experte auswählen</span>
                                         </button>
                                         <button
                                             onClick={() => setIsPromptSidebarOpen(true)}
@@ -158,7 +158,7 @@ export default function Chat() {
                                     type="button"
                                     onClick={() => setIsAssistantSidebarOpen(true)}
                                     className="px-4 py-2 text-gray-500 hover:text-gray-700 rounded-lg border hover:bg-gray-50 transition-colors flex items-center gap-2"
-                                    title="Assistenten auswählen"
+                                    title="Experte auswählen"
                                 >
                                     <Users className="w-5 h-5" />
                                     <span className="text-sm whitespace-nowrap">
@@ -168,7 +168,7 @@ export default function Chat() {
                                                 {selectedAssistant.title}
                                             </span>
                                         ) : (
-                                            'Assistenten'
+                                            'Experte'
                                         )}
                                     </span>
                                 </button>
@@ -182,13 +182,43 @@ export default function Chat() {
                                     <span className="text-sm">Prompts</span>
                                 </button>
                             </div>
-                            <input
-                                className="flex-1 p-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                value={input}
-                                placeholder={selectedAssistant ? `Schreibe eine Nachricht an ${selectedAssistant.title}...` : "Schreibe eine Nachricht..."}
-                                onChange={handleInputChange}
-                                disabled={isLoading}
-                            />
+                            <div className="flex-1 relative">
+                                <input
+                                    className="w-full p-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    value={input}
+                                    placeholder={selectedAssistant ? `Schreibe eine Nachricht an ${selectedAssistant.title}...` : "Schreibe eine Nachricht..."}
+                                    onChange={handleInputChange}
+                                    disabled={isLoading}
+                                />
+                                <div className="absolute -top-8 left-0 flex gap-2">
+                                    {!selectedAssistant && (
+                                        <>
+                                            <button
+                                                onClick={() => handleAssistantSelect({
+                                                    title: "Marketing Experte",
+                                                    description: "Hilft bei Marketing-Aufgaben",
+                                                    category: "Marketing",
+                                                    icon: "📢"
+                                                })}
+                                                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
+                                            >
+                                                Marketing 📢
+                                            </button>
+                                            <button
+                                                onClick={() => handleAssistantSelect({
+                                                    title: "SEO Experte",
+                                                    description: "Hilft bei SEO-Optimierung",
+                                                    category: "SEO",
+                                                    icon: "🔍"
+                                                })}
+                                                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
+                                            >
+                                                SEO 🔍
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
                             <button
                                 type="submit"
                                 disabled={isLoading}
@@ -220,7 +250,7 @@ export default function Chat() {
             {/* Assistant Selection Sidebar */}
             <aside className={`fixed right-0 top-16 bottom-0 w-96 bg-white p-6 overflow-y-auto transform transition-transform duration-300 ease-in-out border-l shadow-xl z-50 ${isAssistantSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-lg font-semibold text-gray-900">Assistenten</h2>
+                    <h2 className="text-lg font-semibold text-gray-900">Experte</h2>
                     <button
                         onClick={() => setIsAssistantSidebarOpen(false)}
                         className="text-gray-500 hover:text-gray-700"
@@ -242,7 +272,7 @@ export default function Chat() {
                                 className="w-full p-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
                             >
                                 <Bot className="w-4 h-4" />
-                                <span>Ohne Assistent fortfahren</span>
+                                <span>Ohne Experte fortfahren</span>
                             </button>
                         )}
                         {assistants.map((assistant) => (
