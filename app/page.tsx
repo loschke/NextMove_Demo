@@ -2,6 +2,7 @@
 
 import HeroSection from './components/landing/HeroSection';
 import FeaturesSection from './components/landing/FeaturesSection';
+import ProfessionalServicesSection from './components/landing/ProfessionalServicesSection';
 import CtaSection from './components/landing/CtaSection';
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
         <main>
             <HeroSection />
             <FeaturesSection />
+            <ProfessionalServicesSection />
             <CtaSection />
 
             {/* Simple Footer */}

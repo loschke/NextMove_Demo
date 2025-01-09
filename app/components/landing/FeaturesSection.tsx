@@ -59,7 +59,7 @@ export default function FeaturesSection() {
                             Alle KI-Tools zentral orchestriert
                         </p>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            Von ChatGPT und Claude für Texte bis zu Midjourney und Ideogram für Bilder - die besten KI-Provider in einer Suite
+                            Von ChatGPT und Claude für Texte bis zu Midjourney und Ideogram für Bilder - die besten KI-Provider in einer Suite, plus umfassende Beratung und Schulung für Ihre erfolgreiche KI-Transformation
                         </p>
                     </div>
 
